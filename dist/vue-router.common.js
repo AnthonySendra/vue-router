@@ -365,8 +365,10 @@ function guardEvent (e) {
   if (e.button !== 0) { return }
   // don't redirect if `target="_blank"`
   /* istanbul ignore if */
-  var target = e.target.getAttribute('target')
-  if (/\b_blank\b/i.test(target)) { return }
+  if (e.target && e.target.getAttribute) {
+    var target = e.target.getAttribute('target')
+    if (/\b_blank\b/i.test(target)) { return }
+  }
 
   e.preventDefault()
   return true
